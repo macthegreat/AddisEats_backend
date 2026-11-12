@@ -36,7 +36,7 @@ public class RestaurantController : ControllerBase
             var restaurantDtos = restaurants.Select(r => r.ToDto()).ToList();
             return Ok(restaurantDtos);
         }
-        [HttpGet("")]
+        
         
     }
     
