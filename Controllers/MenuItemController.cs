@@ -21,6 +21,7 @@ namespace AddisEats.Api.Controllers;
     [HttpGet()]
     public IActionResult GetAll([FromQuery] string? Category)
     {
+        
         var result = _menuItemService.GetAll(Category);
         return Ok(result);
     }

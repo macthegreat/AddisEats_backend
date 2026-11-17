@@ -16,10 +16,10 @@ public class MenuitemService : IMenuItemService
 
     public List<MenuItem> GetAll(string? Category)
     {
-        var items = _menuitem.Where(m => m.Category == null || m.Category == Category).ToList();
+
+        var items = _menuitem.Where(m => Category == null || m.Category == Category).ToList();
         return items;
 
-        
     }
 
     public MenuItem? GetById(int id)

@@ -7,5 +7,5 @@ public class Restaurant
     public string PhoneNumber { get; set; }
     public bool IsActive { get; set; }
     public string OwnerAddress{get; set;}
-   
+
 }

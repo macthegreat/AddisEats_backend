@@ -13,8 +13,7 @@ namespace AddisEats.Api.Controllers
     {
         public OrderController()
         {
+            
         }
-
-      
     }
 }
