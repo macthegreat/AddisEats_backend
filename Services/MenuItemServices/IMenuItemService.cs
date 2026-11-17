@@ -1,8 +1,10 @@
 using AddisEats.Api.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AddisEats.Api.Services.MenuItemServices;
+
 public interface IMenuItemService
 {
-    List<MenuItem> GetMenuItems();
-    MenuItem GetMenuItemById(int id);
+    List<MenuItem> GetAll(string? Category);
+      MenuItem? GetById(int id);
 }

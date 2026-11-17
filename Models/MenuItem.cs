@@ -7,14 +7,9 @@ public class MenuItem
     public string Category { get; set; }
     public decimal Price { get; set; }
 
+    public int RestaurantId {get; set;}
+
     public decimal PriceWithTax => Price * 1.15m; // Assuming a 15% tax rate
 
-    public MenuItem(int id, string name, string category, decimal price)
-    {
-        Id = id;
-        Name = name;
-        Category = category;
-        Price = price;
-
-    }
+  
 }

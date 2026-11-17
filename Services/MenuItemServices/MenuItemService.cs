@@ -1,29 +1,30 @@
 using AddisEats.Api.Models;
-using AddisEats.Api.Services.MenuItemServices;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace AddisEats.Api.Services.MenuItemServices;
-public class MenuItemService : IMenuItemService
+
+public class MenuitemService : IMenuItemService
 {
-    private List<MenuItem> menuItems;
-
-    public MenuItemService()
+    private readonly List<MenuItem> _menuitem = new List<MenuItem>()
     {
-        menuItems = new List<MenuItem>
-        {
-            new MenuItem(1, "Spaghetti Bolognese", "Main Course", 12.99m),
-            new MenuItem(2, "Caesar Salad", "Salad", 8.99m),
-            new MenuItem(3, "Tiramisu", "Dessert", 6.99m)
-        };
+      new MenuItem {Id=1,Category="Main-course",Name ="shiro" ,Price =230m, RestaurantId=1},
+      new MenuItem {Id = 2,Category ="Traditional-Dish",Name ="DoroWet", Price=1280m,RestaurantId=3},
+      new MenuItem {Id= 3 , Category = "fasting", Name="Cotelet",Price =430m,RestaurantId =1},
+      new MenuItem {Id= 4 , Category = "fasting", Name="salad",Price =330m,RestaurantId =1}
+      
+    };
+
+    public List<MenuItem> GetAll(string? Category)
+    {
+        var items = _menuitem.Where(m => m.Category == null || m.Category == Category).ToList();
+        return items;
+
+        
     }
 
-    public List<MenuItem> GetMenuItems()
+    public MenuItem? GetById(int id)
     {
-        return menuItems;
-    }
-
-    public MenuItem GetMenuItemById(int id)
-    {
-        return menuItems.FirstOrDefault(x => x.Id == id);
+        var result = _menuitem.FirstOrDefault(m => m.Id == id);
+        return result;
     }
 }

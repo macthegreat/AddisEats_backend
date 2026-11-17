@@ -1,32 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using AddisEats.Api.Models;
 using AddisEats.Api.Services.MenuItemServices;
+using System.Runtime.CompilerServices;
+
+namespace AddisEats.Api.Controllers;
 
 [ApiController]
-[Route("api/V1/[controller]")]
-public class MenuItemController : ControllerBase
+[Route("api/v1/[controller]")]
+
+    public class MenuItemController : ControllerBase
 {
-    private readonly IMenuItemService menuItemService;
+    
+    private readonly IMenuItemService _menuItemService;
 
     public MenuItemController(IMenuItemService menuItemService)
     {
-        this.menuItemService = menuItemService;
+        _menuItemService = menuItemService;
     }
-[HttpGet]
-    public ActionResult<List<MenuItem>> GetMenuItems()
+
+    [HttpGet()]
+    public IActionResult GetAll([FromQuery] string? Category)
     {
-        return Ok(menuItemService.GetMenuItems());
+        var result = _menuItemService.GetAll(Category);
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<MenuItem> GetMenuItem(int id)
+    public IActionResult GetById(int id)
     {
-        var menuItem = menuItemService.GetMenuItemById(id);
-        if (menuItem == null)
+        var menuItem = _menuItemService.GetById(id);
+        if(menuItem == null)
         {
-            return NotFound();
+            return NoContent();
         }
         return Ok(menuItem);
     }
-
+    
 }
+
+
