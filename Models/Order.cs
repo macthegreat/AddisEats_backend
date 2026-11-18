@@ -2,11 +2,11 @@ namespace AddisEats.Api.Models;
 
 public class Order
 {
-    int Id { get; set; }
-    int RestaurantId { get; set; }
-    int MenuItemId { get; set; }
-    string CustomerName { get; set; }
-    string PhoneNumber { get; set; }
-    string OrderLocation { get; set; }
+    public int Id { get; set; }
+   public  int RestaurantId { get; set; }
+    public int MenuItemId { get; set; }
+    public string CustomerName { get; set; }
+    public string PhoneNumber { get; set; }
+    public string OrderLocation { get; set; }
     
 }

@@ -33,9 +33,9 @@ private readonly List<MenuItem> menuItems =SeedData.menuItems;
         return results;
     }
 
-    public List<MenuItem> GetMenu(int id)
+    public List<MenuItem> GetMenu(int RestaurantId)
     {
-        var menuResult=menuItems.Where(m => m.RestaurantId == id).ToList();
+        var menuResult=menuItems.Where(m => m.RestaurantId == RestaurantId).ToList();
         return menuItems;
     }
 

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AddisEats.Api.Models;
+using AddisEats.Api.Services.OrderServices;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using AddisEats.Api.Mappers;
 
 namespace AddisEats.Api.Controllers
 {
@@ -11,9 +14,31 @@ namespace AddisEats.Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        public OrderController()
+        private readonly IOrderService _orderService;
+
+        public OrderController(IOrderService orderService)
         {
-            
+            _orderService = orderService;
         }
+
+        [HttpGet()]
+        public IActionResult GetAllOrders([FromQuery] string? OrderLocation , int Page= 1,int pageSize = 5)
+        {
+            var orders = _orderService.GetAllOrders(OrderLocation , Page ,pageSize);
+            var orderDto = orders.Select(o => o.ToOrderDto()).ToList();
+            return Ok(orderDto);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetOrderById(int id)
+        {
+            var order = _orderService.GetOrderById(id);
+            if(order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order.ToOrderDto());
+        }
+        
     }
 }

@@ -50,8 +50,9 @@ public class RestaurantController : ControllerBase
         {
             return NotFound();
         }
-        var item = _restaurantService.GetMenu(RestaurantId).Where(m => m.RestaurantId == RestaurantId).ToList();
-        var itemDto = item;
+        var item = _restaurantService.GetMenu(RestaurantId)
+        .Where(m => m.RestaurantId == RestaurantId).ToList();
+        
         return Ok(item);
     }
 }

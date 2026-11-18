@@ -27,4 +27,11 @@ public class SeedData
     new MenuItem {Id= 3 , Category = "fasting", Name="Cotelet",Price =430m,RestaurantId =1},
     new MenuItem {Id= 4 , Category = "fasting", Name="salad",Price =330m,RestaurantId =1}
     };
+
+    public static List<Order> listOfOrders = new List<Order>
+    {
+        new Order {Id =1, RestaurantId =1, MenuItemId=1, CustomerName ="Abebe", OrderLocation="Ayat" , PhoneNumber="0919385189"}
+    };
 }
+
+
