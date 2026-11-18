@@ -1,26 +1,42 @@
 using AddisEats.Api.Models;
 using AddisEats.Api.Data;
 using AddisEats.Api.DTOs;
+using AddisEats.Api.Mappers;
 
 namespace AddisEats.Api.Services.RestaurantServices;
 
 public class RestaurantService : IRestaurantService
 {
-    
+
 private readonly List<Restaurant> restaurants = SeedData.restaurants;
 private readonly List<MenuItem> menuItems =SeedData.menuItems;
-    
-    public List<Restaurant> GetAllRestaurants(string? Location, int page, int pageSize)
+
+    public PagedResultDto<RestaurantDto> GetAllRestaurants(RetaurantQuery query)
     {
-        var result = restaurants.Where(x =>Location ==null || x.Location ==Location)
+        var result = restaurants.Where(x =>query.Address ==null || x.Location ==query.Address)
+        .Where(x=>query.Name == null || x.Name ==query.Name)
+        .Where(x => query.IsActive == null || x.IsActive == query.IsActive)
         .OrderBy(r=>r.Name)
-        .Skip((page -1) *pageSize)
-        .Take(pageSize)
         .ToList();
 
-        return result;
-    }
+        var totalCount = result.Count();
 
+        var toReturn = result
+        .Skip((1-query.Page) *query.PageSize)
+        .Take(query.PageSize)
+        .ToList();
+
+        PagedResultDto<RestaurantDto> pagedResultDto = new PagedResultDto<RestaurantDto>
+        {
+            TotalCount =totalCount,
+            Page = query.Page,
+            PageSize = query.PageSize,
+            Data= toReturn.Select(x=>x.ToDto()).ToList()
+            
+        };
+
+        return pagedResultDto;
+    }
     public Restaurant? GetRestaurantById(int id)
     {
        var result = restaurants.FirstOrDefault(x => x.Id ==id);
@@ -38,6 +54,4 @@ private readonly List<MenuItem> menuItems =SeedData.menuItems;
         var menuResult=menuItems.Where(m => m.RestaurantId == RestaurantId).ToList();
         return menuItems;
     }
-
-
 }

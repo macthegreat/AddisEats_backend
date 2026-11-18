@@ -29,7 +29,7 @@ namespace AddisEats.Api.Controllers
             return Ok(orderDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int:min(1)}")]
         public IActionResult GetOrderById(int id)
         {
             var order = _orderService.GetOrderById(id);

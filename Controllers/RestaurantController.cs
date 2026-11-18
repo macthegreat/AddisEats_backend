@@ -24,11 +24,11 @@ public class RestaurantController : ControllerBase
     }
 
     [HttpGet()]
-    public IActionResult GetAllRestaurants([FromQuery] string? Location, int page=1,int pageSize = 3)
+    public IActionResult GetAllRestaurants([FromQuery] RetaurantQuery query)
     {
-        var restaurants = _restaurantService.GetAllRestaurants(Location ,page ,pageSize);
-        var restaurantDto = restaurants.Select(r => r.ToDto()).ToList();
-        return Ok(restaurantDto);
+        var restaurants = _restaurantService.GetAllRestaurants(query);
+        //var restaurantDto = restaurants.Select(r => r.ToDto()).ToList();
+        return Ok(restaurants);
     } 
 
     [HttpGet("{id}")]

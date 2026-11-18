@@ -1,8 +1,9 @@
 using AddisEats.Api.Models;
+using AddisEats.Api.DTOs;
 
 public interface IRestaurantService
 {
-    List<Restaurant> GetAllRestaurants(string? Location, int page, int pageSize);
+    PagedResultDto<RestaurantDto> GetAllRestaurants(RetaurantQuery query);
     Restaurant? GetRestaurantById(int id);
 
     List<Restaurant> Search(string? Name);
