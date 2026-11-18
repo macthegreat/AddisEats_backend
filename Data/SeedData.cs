@@ -19,4 +19,12 @@ public class SeedData
         new Restaurant { Id = 11, Name = "Injera Restaurant", Location = "Mexico", PhoneNumber = "555-2345", IsActive = true, OwnerAddress = "680 Poplar St" },
         new Restaurant { Id = 12, Name = "Bunna Restaurant", Location = "Ayat", PhoneNumber = "555-6789", IsActive = true, OwnerAddress = "791 Fir St" }
     };
+
+    public static List<MenuItem> menuItems = new List<MenuItem>
+    {
+    new MenuItem {Id=1,Category="Main-course",Name ="shiro" ,Price =230m, RestaurantId=1},
+    new MenuItem {Id = 2,Category ="Traditional-Dish",Name ="DoroWet", Price=1280m,RestaurantId=3},
+    new MenuItem {Id= 3 , Category = "fasting", Name="Cotelet",Price =430m,RestaurantId =1},
+    new MenuItem {Id= 4 , Category = "fasting", Name="salad",Price =330m,RestaurantId =1}
+    };
 }

@@ -8,6 +8,7 @@ public class RestaurantService : IRestaurantService
 {
     
 private readonly List<Restaurant> restaurants = SeedData.restaurants;
+private readonly List<MenuItem> menuItems =SeedData.menuItems;
     
     public List<Restaurant> GetAllRestaurants(string? Location, int page, int pageSize)
     {
@@ -30,6 +31,12 @@ private readonly List<Restaurant> restaurants = SeedData.restaurants;
     {
         var results = restaurants.Where(s => Name == null || s.Name ==Name).ToList();
         return results;
+    }
+
+    public List<MenuItem> GetMenu(int id)
+    {
+        var menuResult=menuItems.Where(m => m.RestaurantId == id).ToList();
+        return menuItems;
     }
 
 

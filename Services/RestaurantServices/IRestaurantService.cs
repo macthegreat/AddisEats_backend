@@ -7,4 +7,6 @@ public interface IRestaurantService
 
     List<Restaurant> Search(string? Name);
 
+    List<MenuItem> GetMenu(int RestaurantId);
+
 }

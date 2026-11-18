@@ -14,4 +14,15 @@ public static class RestaurantMapper
             restaurant.IsActive
         );
     }
+    public static RestaurantDto ToMenuItemDto(this Restaurant restaurant)
+    {
+        return new RestaurantDto(
+            restaurant.Id,
+            restaurant.Name,
+            restaurant.Location,
+            restaurant.PhoneNumber,
+            restaurant.IsActive
+
+        );
+    }
 }
