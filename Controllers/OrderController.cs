@@ -7,6 +7,7 @@ using AddisEats.Api.Models;
 using AddisEats.Api.Services.OrderServices;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AddisEats.Api.Mappers;
+using AddisEats.Api.DTOs;
 
 namespace AddisEats.Api.Controllers
 {
@@ -38,6 +39,13 @@ namespace AddisEats.Api.Controllers
                 return NotFound();
             }
             return Ok(order.ToOrderDto());
+        }
+
+        [HttpPost()]
+        public IActionResult CreateNewOrder([FromBody] CreateOrderDto createOrderDto)
+        {
+            var newOrder = _orderService.CreateNewOrder(createOrderDto);
+            return CreatedAtAction(nameof(GetOrderById),new{id = newOrder.Id}, newOrder );
         }
         
     }

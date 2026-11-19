@@ -9,6 +9,5 @@ string PhoneNumber,
 bool IsActive,
 string OwnerAddress
 
-
 );
 

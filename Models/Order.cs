@@ -7,6 +7,8 @@ public class Order
     public int MenuItemId { get; set; }
     public string CustomerName { get; set; }
     public string PhoneNumber { get; set; }
-    public string OrderLocation { get; set; }
-    
+    public string DeliveryAddress { get; set; }
+    public int Quantity {get; set;}
+    public decimal TotalAmount {get; set;}
+
 }

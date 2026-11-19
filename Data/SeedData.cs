@@ -30,7 +30,7 @@ public class SeedData
 
     public static List<Order> listOfOrders = new List<Order>
     {
-        new Order {Id =1, RestaurantId =1, MenuItemId=1, CustomerName ="Abebe", OrderLocation="Ayat" , PhoneNumber="0919385189"}
+        
     };
 }
 

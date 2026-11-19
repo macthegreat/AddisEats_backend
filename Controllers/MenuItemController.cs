@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using AddisEats.Api.Models;
 using AddisEats.Api.Services.MenuItemServices;
 using System.Runtime.CompilerServices;
+using AddisEats.Api.DTOs;
 
 namespace AddisEats.Api.Controllers;
 
@@ -35,6 +36,13 @@ namespace AddisEats.Api.Controllers;
             return NoContent();
         }
         return Ok(menuItem);
+    }
+
+    [HttpPost()]
+    public IActionResult CreateRestaurant([FromBody] CreateMenuItemDto createMenuItemDto)
+    {
+        var newMenuitem = _menuItemService.CreateNewMenuItem(createMenuItemDto);
+        return CreatedAtAction(nameof(GetById), new{id=newMenuitem.Id},newMenuitem);
     }
     
 }

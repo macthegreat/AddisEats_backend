@@ -10,7 +10,7 @@ public static class OrderMapper{
            
             order.MenuItemId,
             order.CustomerName,
-            order.OrderLocation
+            order.DeliveryAddress
 
         );
     }

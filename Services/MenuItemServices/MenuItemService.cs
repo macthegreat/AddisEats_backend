@@ -1,22 +1,15 @@
 using AddisEats.Api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using AddisEats.Api.DTOs;
+using AddisEats.Api.Data;
 
 namespace AddisEats.Api.Services.MenuItemServices;
 
 public class MenuitemService : IMenuItemService
 {
     //List of menu items
-    private readonly List<MenuItem> _menuitem = new List<MenuItem>()
-    {
-      new MenuItem {Id=1,Category="Main-course",Name ="shiro" ,Price =230m, RestaurantId=1},
-      new MenuItem {Id = 2,Category ="Traditional-Dish",Name ="DoroWet", Price=1280m,RestaurantId=3},
-      new MenuItem {Id= 3 , Category = "fasting", Name="Cotelet",Price =430m,RestaurantId =1},
-      new MenuItem {Id= 4 , Category = "fasting", Name="salad",Price =330m,RestaurantId =1},
-      new MenuItem {Id=5 ,}
-
-      
-    };
-
+   private static readonly List<MenuItem> _menuitem = SeedData.menuItems;
+    private static int _index = 12;
     public List<MenuItem> GetAll(string? Category)
     {
 
@@ -29,5 +22,22 @@ public class MenuitemService : IMenuItemService
     {
         var result = _menuitem.FirstOrDefault(m => m.Id == id);
         return result;
+    }
+    public MenuItem CreateNewMenuItem(CreateMenuItemDto createMenuItemDto)
+    {
+        MenuItem menuItem = new MenuItem
+        {
+            Id = _index++,
+            RestaurantId=createMenuItemDto.RestaurantId,
+            Name = createMenuItemDto.Name,
+            Category = createMenuItemDto.Category,
+            Price =createMenuItemDto.Price,
+
+
+        };
+
+        _menuitem.Add(menuItem);
+        return menuItem;
+       
     }
 }

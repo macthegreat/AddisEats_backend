@@ -55,4 +55,10 @@ public class RestaurantController : ControllerBase
         
         return Ok(item);
     }
+    [HttpPost()]
+    public IActionResult CreateRestaurant([FromBody] CreateRestaurantDto createRestaurantDto)
+    {
+        var newRstaurant = _restaurantService.CreateRestaurant(createRestaurantDto);
+        return CreatedAtAction(nameof(GetRestaurantById),new{id = newRstaurant.Id},newRstaurant);
+    }
 }

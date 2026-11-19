@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMenuItemService, MenuitemService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
-builder.Services.AddScoped<IOrderService , OrderService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 //adding CORS policy configuration to allow requests from the frontend application
