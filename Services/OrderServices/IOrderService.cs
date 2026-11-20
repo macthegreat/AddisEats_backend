@@ -1,5 +1,6 @@
 using AddisEats.Api.Models;
 using AddisEats.Api.DTOs;
+using AddisEats.Api.Common;
 
 namespace AddisEats.Api.Services.OrderServices;
 
@@ -9,6 +10,6 @@ public interface IOrderService
 
     Order? GetOrderById (int id);
 
-    Order CreateNewOrder(CreateOrderDto createOrderDto);
+    Result<Order> CreateNewOrder(CreateOrderDto createOrderDto);
     
 }

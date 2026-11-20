@@ -1,12 +1,23 @@
 using AddisEats.Api.Models;
 using AddisEats.Api.DTOs;
 using AddisEats.Api.Data;
+using AddisEats.Api.Common;
+using AddisEats.Api.Services.RestaurantServices;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace AddisEats.Api.Services.OrderServices;
 
 public class OrderService : IOrderService
 {
+
+        //DI injected restaurant
+    private readonly IRestaurantService _restaurantService;
+
+    public OrderService(IRestaurantService restaurantService)
+    {
+        _restaurantService = restaurantService;
+    }
+
     private static readonly List<Order> orderList = SeedData.listOfOrders;
     private static int _nextId = 1;
 
@@ -27,8 +38,19 @@ public class OrderService : IOrderService
         return order;
     }
 
-    public Order CreateNewOrder(CreateOrderDto createOrderDto)
+    public Result<Order> CreateNewOrder(CreateOrderDto createOrderDto)
     {
+
+    var restaurnat = _restaurantService.GetRestaurantById(createOrderDto.RestaurantId);
+    if(restaurnat == null)
+        {
+            return Result<Order>.fail("Restaurant Not Found","The restaurant you tring to access is not here",404);
+        }
+        if (!restaurnat.IsActive)
+        {
+            return Result<Order>.fail("restaurant Is Not Active", "the selected restaurant is not active yet", 409);
+        }
+
        Order order = new Order
        {
            Id = _nextId++,
@@ -41,7 +63,7 @@ public class OrderService : IOrderService
 
        };
        orderList.Add(order);
-       return order;
+       return Result<Order>.Ok(order);
     }
     
 };

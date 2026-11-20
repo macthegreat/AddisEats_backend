@@ -8,6 +8,7 @@ using AddisEats.Api.Services.OrderServices;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AddisEats.Api.Mappers;
 using AddisEats.Api.DTOs;
+using AddisEats.Api.Common;
 
 namespace AddisEats.Api.Controllers
 {
@@ -23,9 +24,9 @@ namespace AddisEats.Api.Controllers
         }
 
         [HttpGet()]
-        public IActionResult GetAllOrders([FromQuery] string? OrderLocation , int Page= 1,int pageSize = 5)
+        public IActionResult GetAllOrders([FromQuery] string? OrderLocation, int Page = 1, int pageSize = 5)
         {
-            var orders = _orderService.GetAllOrders(OrderLocation , Page ,pageSize);
+            var orders = _orderService.GetAllOrders(OrderLocation, Page, pageSize);
             var orderDto = orders.Select(o => o.ToOrderDto()).ToList();
             return Ok(orderDto);
         }
@@ -34,7 +35,7 @@ namespace AddisEats.Api.Controllers
         public IActionResult GetOrderById(int id)
         {
             var order = _orderService.GetOrderById(id);
-            if(order == null)
+            if (order == null)
             {
                 return NotFound();
             }
@@ -44,9 +45,20 @@ namespace AddisEats.Api.Controllers
         [HttpPost()]
         public IActionResult CreateNewOrder([FromBody] CreateOrderDto createOrderDto)
         {
+
             var newOrder = _orderService.CreateNewOrder(createOrderDto);
-            return CreatedAtAction(nameof(GetOrderById),new{id = newOrder.Id}, newOrder );
+            if (!newOrder.IsSuccess)
+            {
+                return Problem(
+                    title: newOrder?.error.Message,
+                    statusCode: newOrder?.error.Status,
+                    detail: newOrder?.error.Code
+
+                );
+            }
+            var order = newOrder.Value;
+            return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, newOrder);
+
         }
-        
     }
 }
