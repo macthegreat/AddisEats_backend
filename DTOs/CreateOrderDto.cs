@@ -3,6 +3,7 @@ using AddisEats.Api.Validation;
 
 namespace AddisEats.Api.DTOs;
 public record CreateOrderDto(
+    
     [Range(1,int.MaxValue,ErrorMessage ="Restaurant id must be a posetive integer")]
     int RestaurantId,
     int menuItemId,
@@ -16,4 +17,5 @@ public record CreateOrderDto(
     [Range(1,50,ErrorMessage = " quantity should be between 1 and 50")]
     int Quantity,
     decimal TotalAmount
+
 );
