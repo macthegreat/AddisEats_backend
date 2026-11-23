@@ -12,10 +12,12 @@ public class OrderService : IOrderService
 
         //DI injected restaurant
     private readonly IRestaurantService _restaurantService;
+    private readonly ILogger<OrderService> _logger;
 
-    public OrderService(IRestaurantService restaurantService)
+    public OrderService(IRestaurantService restaurantService, ILogger<OrderService> logger)
     {
         _restaurantService = restaurantService;
+        _logger=logger;
     }
 
     private static readonly List<Order> orderList = SeedData.listOfOrders;
