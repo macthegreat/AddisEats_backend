@@ -1,6 +1,7 @@
 using AddisEats.Api.Services.MenuItemServices;
 using AddisEats.Api.Services.OrderServices;
 using AddisEats.Api.Services.RestaurantServices;
+using AddisEats.Api.Configurations;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//
+
+
 builder.Services.AddScoped<IMenuItemService, MenuitemService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
@@ -35,6 +40,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.Use(async(context,next) =>
+{
+   Console.WriteLine("the request is coming in");
+
+   next(context);
+
+   Console.WriteLine("requst is going out"); 
+});
 
 app.UseHttpsRedirection();
 
