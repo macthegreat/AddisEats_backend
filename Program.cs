@@ -2,6 +2,7 @@ using AddisEats.Api.Services.MenuItemServices;
 using AddisEats.Api.Services.OrderServices;
 using AddisEats.Api.Services.RestaurantServices;
 using AddisEats.Api.Configurations;
+using AddisEats.Api.Services.UserServices;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMenuItemService, MenuitemService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 //adding CORS policy configuration to allow requests from the frontend application

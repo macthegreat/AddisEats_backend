@@ -32,6 +32,11 @@ public class SeedData
     {
         
     };
+
+    public static List<User> listOfusers = new List<User>
+    {
+        
+    };
 }
 
 
