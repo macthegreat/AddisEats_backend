@@ -11,5 +11,5 @@ public interface IUserService
     User? GetUserById(int id);
 
     User CreateNewUser(CreateUserDto createUserDto);
-    
+
 }

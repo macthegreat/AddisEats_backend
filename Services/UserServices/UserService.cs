@@ -1,5 +1,6 @@
 using AddisEats.Api.Data;
 using AddisEats.Api.DTOs;
+using AddisEats.Api.Mappers;
 using AddisEats.Api.Models;
 
 namespace AddisEats.Api.Services.UserServices;
@@ -11,7 +12,8 @@ public class UserService : IUserService
 
     public List<User> GetAllUsers()
     {
-        return _user;
+       var allUsers =_user.OrderBy(n =>n.FullName).ToList();
+       return allUsers;
     }
 
     public User GetUserById(int id)
@@ -30,7 +32,7 @@ public class UserService : IUserService
             PasswordHash =createUserDto.Password,
             Role = createUserDto.Role
         };
-        
+
          _user.Add(user);
          return user;
     }

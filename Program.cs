@@ -43,14 +43,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Use(async(context,next) =>
-{
-   Console.WriteLine("the request is coming in");
+// app.Use(async(context,next) =>
+// {
+//    Console.WriteLine("the request is coming in");
 
-   next(context);
+//    next(context);
 
-   Console.WriteLine("requst is going out"); 
-});
+//    Console.WriteLine("requst is going out"); 
+// });
 
 app.UseHttpsRedirection();
 
