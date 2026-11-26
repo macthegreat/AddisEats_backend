@@ -30,7 +30,8 @@ public class SeedData
 
     public static List<Order> listOfOrders = new List<Order>
     {
-        
+        new Order{Id=1,CustomerId =1, CustomerName="Abbe", DeliveryAddress="Bole gerji", MenuItemId=1, PhoneNumber="0912212121", Quantity=2, RestaurantId=1, TotalAmount=2300m},
+        new Order{Id=3, CustomerId=2, CustomerName ="beza", DeliveryAddress="mebrathayl", MenuItemId =2, PhoneNumber="0923323232", Quantity=2, RestaurantId=2, TotalAmount=1233m}
     };
 
     public static List<User> listOfusers = new List<User>

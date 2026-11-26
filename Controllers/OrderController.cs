@@ -10,6 +10,7 @@ using AddisEats.Api.Mappers;
 using AddisEats.Api.DTOs;
 using AddisEats.Api.Common;
 using Microsoft.AspNetCore.Authorization;
+using AddisEats.Api.Authorization;
 
 namespace AddisEats.Api.Controllers;
 
@@ -19,10 +20,12 @@ namespace AddisEats.Api.Controllers;
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IAuthorizationService _authorizationService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IAuthorizationService authorizationService )
         {
             _orderService = orderService;
+             _authorizationService = authorizationService;
         }
 
         [HttpGet()]
@@ -35,13 +38,27 @@ namespace AddisEats.Api.Controllers;
 
         //[Authorize]
         [HttpGet("{id:int:min(1)}")]
-        public IActionResult GetOrderById(int id)
+        public async Task<IActionResult> GetOrderById(int id)
         {
             var order = _orderService.GetOrderById(id);
             if (order == null)
             {
                 return NotFound();
             }
+    // longest way to implement resource base authorization
+            var result = await _authorizationService.AuthorizeAsync(User , order,OrderOperations.Read);
+        if (!result.Succeeded)
+        {
+            return Forbid();
+        }
+
+        //shotest way of resource based authorization
+
+        // if(order.CustomerId != int.Parse(User.FindFirst("sub")?.Value))
+        // {
+        //     return Forbid();
+        // }
+
             return Ok(order.ToOrderDto());
         }
 

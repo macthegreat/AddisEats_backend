@@ -16,7 +16,7 @@ public class DemoUserService
             FullName ="Beza Nega",
             Phone ="0911122334",
             IsVerified =true
-            
+        
         };
         
         customer.PasswordHash = passwordHasher.HashPassword(customer, "bez@123");

@@ -13,6 +13,8 @@ using System.Text;
 using Microsoft.OpenApi;
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Authorization;
+using AddisEats.Api.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 
 
@@ -85,6 +87,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddSingleton<IPasswordHasher<User> , PasswordHasher<User>>();
 builder.Services.AddSingleton<DemoUserService>();
 
+
 var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(Options =>
@@ -109,6 +112,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 }
 );
+
+builder.Services.AddScoped<IAuthorizationHandler , OrderOwnerHandler>();
 
 var app = builder.Build();
 

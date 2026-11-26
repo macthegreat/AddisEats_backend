@@ -43,7 +43,7 @@ public class RestaurantController : ControllerBase
         }
         return Ok(restaurant.ToDto());
     }
-
+    [Authorize(policy: "IsVerified"  )]
     [HttpGet("{RestaurantId}/menu")]
     public IActionResult GetMenu(int RestaurantId )
     {
