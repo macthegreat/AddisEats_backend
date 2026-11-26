@@ -3,6 +3,7 @@ using AddisEats.Api.DTOs;
 using AddisEats.Api.Models;
 using AddisEats.Api.Services.AuthService;
 using AddisEats.Api.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,8 @@ public class AuthController : ControllerBase
         _passwordHasher = passwordHasher;
         _authService = authService;
     }
-     [HttpPost()]
+    [AllowAnonymous]
+    [HttpPost("login")]
      public IActionResult Login(LoginDto request)
     {
         var user = _demoUserService.findByPhone(request.Phone);

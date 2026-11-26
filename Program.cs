@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi;
 using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -64,6 +65,13 @@ builder.Services.AddCors(options =>
 builder.Services.Configure<JwtOptions>(
     builder.Configuration.GetSection("Jwt")
 );
+
+builder.Services.AddAuthorization(Options =>
+{
+    Options.FallbackPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+});
 
 //register my AuthService
 builder.Services.AddScoped<AuthService>();

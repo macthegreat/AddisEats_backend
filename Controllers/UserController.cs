@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using AddisEats.Api.Services.UserServices;
 using AddisEats.Api.Mappers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AddisEats.Api.Controllers;
 
@@ -39,7 +40,7 @@ public class UserController : ControllerBase
         return Ok(user.toUserDto());
     }
 
-
+    [Authorize(Roles = "Customer")]
     [HttpPost()]
     public IActionResult CreateNewUser(CreateUserDto createUserDto , IPasswordHasher<User> passwordHasher)
     {
