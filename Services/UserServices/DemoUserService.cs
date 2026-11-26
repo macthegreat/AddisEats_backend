@@ -15,6 +15,7 @@ public class DemoUserService
             Id = 1,
             FullName ="Beza Nega",
             Phone ="0911122334",
+            IsVerified =true
             
         };
         

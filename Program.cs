@@ -71,6 +71,13 @@ builder.Services.AddAuthorization(Options =>
     Options.FallbackPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
+
+    Options.AddPolicy("VerifiedCustomer", policy =>
+    {
+        policy.RequireRole("customer");
+        policy.RequireClaim("IsVerified", "true");
+    
+    });
 });
 
 //register my AuthService

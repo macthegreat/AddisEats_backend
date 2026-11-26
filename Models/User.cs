@@ -7,5 +7,6 @@ public class User
     public string Phone{get;set;}=string.Empty;
     public string PasswordHash {get;set;} =string.Empty;
     public string Role {get;set;} = "Customer";
+    public bool IsVerified {get;set;} = false;
 
 }
