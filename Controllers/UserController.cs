@@ -3,6 +3,7 @@ using AddisEats.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using AddisEats.Api.Services.UserServices;
 using AddisEats.Api.Mappers;
+using Microsoft.AspNetCore.Identity;
 
 namespace AddisEats.Api.Controllers;
 
@@ -40,9 +41,9 @@ public class UserController : ControllerBase
 
 
     [HttpPost()]
-    public IActionResult CreateNewUser(CreateUserDto createUserDto)
+    public IActionResult CreateNewUser(CreateUserDto createUserDto , IPasswordHasher<User> passwordHasher)
     {
-        var newUser = _Userservice.CreateNewUser(createUserDto);
+        var newUser = _Userservice.CreateNewUser(createUserDto, passwordHasher);
         return CreatedAtAction(nameof(GetUserById), new{id = newUser.Id}, newUser.toUserDto());
     }
 

@@ -10,14 +10,12 @@ namespace AddisEats.Api.Validation;
 public class PasswordAttribute : ValidationAttribute
 {
 
-private static readonly Regex regex = new(@"^[a-zA-Z0-9]{6,}$");
+private static readonly Regex regex = new (@"^[a-zA-Z0-9]{6,}$");
 
 public PasswordAttribute()
     {
         ErrorMessage ="enter a password with length of 6";
     }
-
-
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         if(value is null)
@@ -29,6 +27,5 @@ public PasswordAttribute()
             return new ValidationResult(ErrorMessage);
         }
         return ValidationResult.Success;
-    }
-    
+    } 
 }

@@ -17,6 +17,7 @@ public class DemoUserService
             Phone ="0911122334",
             
         };
+        
         customer.PasswordHash = passwordHasher.HashPassword(customer, "bez@123");
         users.Add(customer);
     }
