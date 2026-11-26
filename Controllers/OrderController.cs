@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using AddisEats.Api.Mappers;
 using AddisEats.Api.DTOs;
 using AddisEats.Api.Common;
+using Microsoft.AspNetCore.Authorization;
 
-namespace AddisEats.Api.Controllers
-{
+namespace AddisEats.Api.Controllers;
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -31,6 +33,7 @@ namespace AddisEats.Api.Controllers
             return Ok(orderDto);
         }
 
+        //[Authorize]
         [HttpGet("{id:int:min(1)}")]
         public IActionResult GetOrderById(int id)
         {
@@ -61,4 +64,3 @@ namespace AddisEats.Api.Controllers
 
         }
     }
-}

@@ -9,7 +9,7 @@ public class LoginDto{
     [EthiopianMobile]
     public string Phone {get;set;} = string.Empty;
     [Required] 
-    [Password]  
+    //[Password]  
     public string PasswordHash {get; set;} =string.Empty;
 
 }

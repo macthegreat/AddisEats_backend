@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using AddisEats.Api.Mappers;
 using AddisEats.Api.Services.MenuItemServices;
 using AddisEats.Api.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace AddisEats.Api.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 
